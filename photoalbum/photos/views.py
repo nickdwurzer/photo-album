@@ -1,5 +1,6 @@
-from django.http import HttpResponse
+from django.shortcuts import render
+from django.template import loader
 
 def index(request):
-    
-    return HttpResponse("<h1>Hello World!</h1>")
+    context = {}
+    return render(request, "photos/index.html", context)
