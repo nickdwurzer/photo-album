@@ -18,9 +18,7 @@
             <a class="navbar-brand" href="{% url 'index' %}">Family Photo Album</a>
         </nav>
 
-        {% for photo in photos %}
-        <div> {{ photo.latitude }}, {{ photo.longitude }}, <img src="{{photo.image.url}}" alt="img"></div>
-        {% endfor %}
+        
         <div class="container">
             <div class="row" style="height:100px;">
             </div>
@@ -46,7 +44,7 @@
 
             {% for photo in photos %}
                 L.marker([{{ photo.latitude }}, {{ photo.longitude }}]).addTo(map)
-                    .bindPopup('{{ photo.image.url }}');
+                    .bindPopup('<img src="{{photo.image.url}}" alt="img" width="300">');
             {% endfor %}
         </script>
     </body>
