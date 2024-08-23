@@ -19,7 +19,7 @@
         </nav>
 
         {% for photo in photos %}
-        <div> {{ photo.latitude }}, {{ photo.longitude }}</div>
+        <div> {{ photo.latitude }}, {{ photo.longitude }}, <img src="{{photo.image.url}}" alt="img"></div>
         {% endfor %}
         <div class="container">
             <div class="row" style="height:100px;">
@@ -33,15 +33,21 @@
 
 
         <script>
-            var map = L.map('map').setView([51.505, -0.09], 13);
+            points = [
+            {% for photo in photos %}
+                [{{ photo.latitude }}, {{ photo.longitude }}],
+            {% endfor %}
+            ];
+            var map = L.map('map').fitBounds(points);
 
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
-            L.marker([51.5, -0.09]).addTo(map)
-                .bindPopup('A pretty CSS popup.<br> Easily customizable.')
-                .openPopup();
+            {% for photo in photos %}
+                L.marker([{{ photo.latitude }}, {{ photo.longitude }}]).addTo(map)
+                    .bindPopup('{{ photo.image.url }}');
+            {% endfor %}
         </script>
     </body>
 </html>
