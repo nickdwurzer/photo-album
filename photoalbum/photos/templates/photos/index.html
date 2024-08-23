@@ -18,7 +18,9 @@
             <a class="navbar-brand" href="{% url 'index' %}">Family Photo Album</a>
         </nav>
 
-
+        {% for photo in photos %}
+        <div> {{ photo.latitude }}, {{ photo.longitude }}</div>
+        {% endfor %}
         <div class="container">
             <div class="row" style="height:100px;">
             </div>
